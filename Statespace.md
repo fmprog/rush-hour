@@ -66,6 +66,9 @@ Geef de formule voor de berekening van (de bovengrens van) de grootte van de sta
 * r = aantal keuzes = 70
 * n = mogelijkheden  = 2
 * auto's^2 =70^2
-Laat in een klein voorbeeld zien dat de formule klopt. Het kan makkelijker zijn om dit te schetsen. Plaatjes daarvan kan je uploaden en via een url hieronder met ons delen.
+Laat in een klein voorbeeld zien dat de formule klopt:
+cid:F31177DC-411D-4ADD-B683-CC51E7A397A8![image](https://user-images.githubusercontent.com/90259648/149357869-af0a58df-e510-4051-bcde-d9a2c8d491c5.png)
+In dit voorbeeld kijken we naar een grid van 3x3 met daarin 3 auto's. Deze voertuigen zijn allemaal horizontaal geplaatst.
+
 Bereken de grootte van de state-space voor één of meer van de probleem-instanties in de case.
 
