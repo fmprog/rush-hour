@@ -54,28 +54,49 @@ Opnieuw moeten 50 dozen met flesjes water, 50 dozen fruit, en 30 dozen broodjes 
 ## Opdracht 7
 Geef (de bovengrens van) de grootte van de state-space van de gekozen case.
 Welke case heb je gekozen?
-* Rush Hour
+Rush Hour
+
 Welke variabelen zijn er in de case?
-* breedte veld
-* aantal auto's
-* grootte auto
-* positie auto (x, y)
-* positie exit
-* start posities
+breedte veld
+aantal auto's
+grootte auto
+positie auto (x, y)
+positie exit
+start posities
+
 Beschrijf de eventuele versimpelende aannames die je maakt en waarom de werkelijke state-space grootte hier dan gegarandeerd nooit boven ligt.
-* We zullen een aanname maken over het maximale aantal auto's op de grid.
-* We nemen aan dat de maximale grid grootte 12x12 = 144 is en we nemen aan dat ons speelveld vierkant is.
-* De minimale auto lengte = 2 dus daarom zal het maximale aantal autos 72 zijn als het bord volledig gevuld is. we nemen daarom aan dat het max aantal auto's gelijk is aan:
-* (breedte veld^2 / 2) - 2.
+We zullen een aanname maken over het maximale aantal auto's op de grid.
+We nemen aan dat de maximale grid grootte 12x12 = 144 is en we nemen aan dat ons speelveld vierkant is.
+De minimale auto lengte = 2 dus daarom zal het maximale aantal autos 72 zijn als het bord volledig gevuld is. we nemen daarom aan dat het max aantal auto's gelijk is aan:
+(breedte veld^2 / 2) - 2.
+Ook nemen we aan dat een auto twee rijrichtingen heeft.
+Auto's kunnen zich niet door een ander voertuig heen verplaatsen.
+Auto's kunnen zich niet van het bord verplaatsen behalve via de uitgang.
+
 Geef de formule voor de berekening van (de bovengrens van) de grootte van de state-space van je case.
-* Order matters and repetition matters
-* Dus de formule voor de berekening van de bovengrens van de grootte van de state-space is n^r.
-* r = aantal keuzes = 70
-* n = mogelijkheden  = 2
-* auto's^2 =70^2
+Order matters and repetition matters
+Dus de formule voor de berekening van de bovengrens van de grootte van de state-space is n^r.
+n = lengte bord - 1 = aantal mogelijkheden
+r = aantal autos = aantal keuzes
+=> n^r = (lengte bord - 1 )^ aantal auto's
+
+Er zijn twee soorten voertuigen: een auto(2 x 1) en een vrachtwagen(3x1).
+We versimpelen hier dat elk voertuig een auto is omdat dit voertuig de minimaalste lengte heeft en dus zo de hoogste bovengrens behaalt.
+De grootte van het bord is gelijk aan (aantal rijen)^2 
+
+Deze formule berekent het aantal auto's op het bord wat de meeste bewegingsmogelijkheden heeft.
+aantal auto's = lengte*2 - 2
+
+
 Laat in een klein voorbeeld zien dat de formule klopt:
 cid:F31177DC-411D-4ADD-B683-CC51E7A397A8![image](https://user-images.githubusercontent.com/90259648/149357869-af0a58df-e510-4051-bcde-d9a2c8d491c5.png)
 In dit voorbeeld kijken we naar een grid van 3x3 met daarin 3 auto's. Deze voertuigen zijn allemaal horizontaal geplaatst.
+n^r = (lengte bord - 1 )^ aantal auto's = 2^3 = 8.
 
 Bereken de grootte van de state-space voor één of meer van de probleem-instanties in de case.
+In game #1 zijn er 13 auto's en de grid is 6x6 dus er zijn 36 vakken.
+Een auto heeft 5 mogelijke posities en een vrachtwagen heeft 4 mogelijke posities.
+n^r - 1 = 5^13 - 1= 1220703125 - 1
+We trekken hier een vanaf omdat de vrachtwagen een positie minder heeft als een auto.
+
 
