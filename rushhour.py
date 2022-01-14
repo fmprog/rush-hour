@@ -1,3 +1,4 @@
+import numpy as np
 
 
 # class Board:
@@ -9,17 +10,18 @@
 
 
 class Car:
-    def __init__(self, unique_id, length, type, color, position, orientation):
+    def __init__(self, unique_id, length, col, row, color, position, orientation):
         '''Creates a vehicle'''
         self.unique_id = unique_id
         self.length = length
+        self.col = col
+        self.row = row
         # self.type = self.type()
         self.color = color
         self.position = position (1,1)
         self.orientation = orientation
 
     #def type():
-
 
 
 class Game:
@@ -30,25 +32,48 @@ class Game:
         self.length = length
         self.exit = exit
         self.grid = self.grid()
+        self.vehicles = self.create_vehicles()
+
 
     def grid(self):
-        board = {}
-        for row in range(self.length):
-            for col in range(self.length):
-                board[(row,col)] = "empty"
+        y = np.zeros((self.length, self.length))
+        print(y)
 
-        if self.number_cars > 0:
-            for car in range(self.number_cars):
-                board[self.start_positions] = "car"
+    def create_vehicles(self):
+        """
+        creates vehicles using csv file
+        """
+        vehicles = {}
 
-        # to print the board
-        for i in range(self.length):
-            for j in range(self.length):
-                print(board[(i, j)], end ='   ')
-         
-            print()
+        with open("/home/emily/programmeertheorie/gameboards/Rushhour6x6_1.csv") as file:
+            car_data = csv.DictReader(file)
+
+            for line in car_data:
+                id = line['car']
+                orientation = line['orientation']
+                column = int(line['col'])
+                row = int(line['row'])
+                length = int(line['length'])
+
+                position = []
+                position.append((row, column))
+
+                for i in range(length - 1):
+                    if orientation == 'H':
+                        column =+ 1
+                        position.append((row, column))
+                    else:
+                        row =+ 1
+                        position.append((row, column))
+
+                vehicles[id] = Car(id, orientation, column, row, length, position)
+
+        return vehicles
+
+
 
 
 
 if __name__ == "__main__":
+    # Game 1 
     game1 = Game(1, (3, 1), 5, (3, 5))
