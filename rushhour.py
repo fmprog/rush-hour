@@ -1,43 +1,32 @@
 import numpy as np
-
-
-# class Board:
-#     def __init__(self, length, exit):
-#         '''Creates an empty board'''
-#         self.length = length
-#         self.width = length
-#         self.exit = exit
+import csv
 
 
 class Car:
-    def __init__(self, unique_id, length, col, row, color, position, orientation):
+    def __init__(self, id, orientation, column, row, length, position):
         '''Creates a vehicle'''
-        self.unique_id = unique_id
-        self.length = length
-        self.col = col
-        self.row = row
-        # self.type = self.type()
-        self.color = color
-        self.position = position (1,1)
+        self.id = id
         self.orientation = orientation
-
-    #def type():
+        self.column = column
+        self.row = row
+        self.length = length
+        self.position = position
 
 
 class Game:
-    def __init__(self, number_cars, start_positions, length, exit):
+    def __init__(self, length, exit):
         '''Creates the game'''
-        self.number_cars = number_cars
-        self.start_positions = start_positions
         self.length = length
         self.exit = exit
-        self.grid = self.grid()
+        self.board = self.grid()
         self.vehicles = self.create_vehicles()
+        self.move = self.movement('A', 'R')
 
 
     def grid(self):
-        y = np.zeros((self.length, self.length))
-        print(y)
+        board = np.zeros((self.length, self.length), dtype='O')
+        return board
+
 
     def create_vehicles(self):
         """
@@ -45,30 +34,73 @@ class Game:
         """
         vehicles = {}
 
-        with open("/home/emily/programmeertheorie/gameboards/Rushhour6x6_1.csv") as file:
+        with open("gameboards/Rushhour6x6_1.csv") as file:
             car_data = csv.DictReader(file)
 
             for line in car_data:
                 id = line['car']
                 orientation = line['orientation']
-                column = int(line['col'])
-                row = int(line['row'])
+                column = int(line['col']) - 1
+                row = int(line['row']) - 1
                 length = int(line['length'])
 
                 position = []
-                position.append((row, column))
+                position.append([row, column])
 
                 for i in range(length - 1):
                     if orientation == 'H':
-                        column =+ 1
-                        position.append((row, column))
+                        column += 1
+                        position.append([row, column])
                     else:
-                        row =+ 1
-                        position.append((row, column))
+                        row += 1
+                        position.append([row, column])
 
                 vehicles[id] = Car(id, orientation, column, row, length, position)
 
+            for id in vehicles.keys():
+                # access the positions for each car and add them to the board
+                for i in vehicles[id].position:
+                    self.board[i[0]][i[1]] = id
+            print(self.board)
+
         return vehicles
+    
+
+    def movement(self, id, move):
+        # check if movement is valid
+        if self.vehicles[id].orientation == 'H':
+            if move == 'R':
+                print("R")
+                # Check if movement is on the board
+                if self.vehicles[id].position[-1][1] != (self.length - 1):
+                    # Check if there is a car in the way
+                    coordrow = self.vehicles[id].position[0][0]
+                    coordcol = self.vehicles[id].position[-1][1] + 1
+                    if self.board[coordrow][coordcol] == 0:
+                        for i in range(self.vehicles[id].length):
+                            self.vehicles[id].position[i][1] +=1
+                    else:
+                        print("car in the way")
+                else: 
+                    print("out of bound")
+                
+                
+
+            elif move == 'L':
+                print("L")
+
+            else:
+                print("Invalid input")
+            
+        else:
+            if move == 'U' or move == 'D':
+                print("valid")
+
+            else:
+                print("Invalid input")
+
+
+
 
 
 
@@ -76,4 +108,4 @@ class Game:
 
 if __name__ == "__main__":
     # Game 1 
-    game1 = Game(1, (3, 1), 5, (3, 5))
+    game1 = Game(6, 3)
