@@ -80,6 +80,13 @@ class Game:
 
         return vehicles
     
+    """
+    def possibilities():
+        
+        #List all vehicles that can be moved
+        
+    """
+
 
     def move(self, uid, move):
         """
