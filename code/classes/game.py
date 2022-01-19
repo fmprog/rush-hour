@@ -5,10 +5,10 @@ import csv
 
 
 class Game:
-    def __init__(self, game, size, exit):
+    def __init__(self, game, size):
         '''Creates the game'''
         self.size = size
-        self.exit = exit
+        self.exit = size - 2
         self.board = self.grid()
         self.vehicles = self.load_vehicles(game)
         

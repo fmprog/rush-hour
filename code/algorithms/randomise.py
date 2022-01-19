@@ -2,24 +2,59 @@ import random
 import copy
 
 
-def random_solver(...):
-        while True:
+def random_solver(game):
 
-        if X.position[0][1] == 4:
-            print("Hoera!")
-            exit
+    X = game.vehicles['X']
+    attempt = 1
     
-        possibilities_vehicles = list(game1.vehicles.keys())
+    while X.position[0][1] != game.exit:
+   
+        possibilities_vehicles = list(game.vehicles.keys())
         select_vehicle = random.choice(possibilities_vehicles)
 
-        if game1.vehicles[select_vehicle].orientation == 'H':
-            possibilities_direction = ['L', 'R']
-        else:
-            possibilities_direction = ['U', 'D']
-        select_direction = random.choice(possibilities_direction)
+        possibilities_direction = []
+        if game.vehicles[select_vehicle].orientation == 'H':
 
-    #   select_vehicle = input("Select a vehicle to move: ")
-    #   select_direction = input("Select a direction to move the vehicle towards (R, L, U, D): ")
-        print(f"Move: {select_vehicle}|{select_direction}")
-        game1.move(select_vehicle, select_direction)
-        game1.show_board()
+            # check if movement to the right is possible
+            front_row_coord = game.vehicles[select_vehicle].position[-1][0]
+            front_col_coord = game.vehicles[select_vehicle].position[-1][1]
+
+            if front_col_coord + 1 != game.size and game.board[front_row_coord][front_col_coord + 1] == 0:
+                possibilities_direction.append('R')
+
+            # check if movement to the left is possible
+            front_row_coord = game.vehicles[select_vehicle].position[0][0]
+            front_col_coord = game.vehicles[select_vehicle].position[0][1]
+
+            if front_col_coord - 1 >= 0 and game.board[front_row_coord][front_col_coord - 1] == 0:
+                possibilities_direction.append('L')
+
+        else:
+
+            # check if movement up is possible
+            front_row_coord = game.vehicles[select_vehicle].position[0][0]
+            front_col_coord = game.vehicles[select_vehicle].position[0][1]
+
+            # check if movement is possible
+            if game.vehicles[select_vehicle].position[0][0] - 1 >= 0 and game.board[front_row_coord - 1][front_col_coord] == 0:
+                possibilities_direction.append('U')
+            
+            # check if movement down is possible
+            front_row_coord = game.vehicles[select_vehicle].position[-1][0]
+            front_col_coord = game.vehicles[select_vehicle].position[-1][1]
+
+            # check if movement is possible
+            if game.vehicles[select_vehicle].position[-1][0] + 1 != game.size and game.board[front_row_coord + 1][front_col_coord] == 0:
+                possibilities_direction.append('D')
+
+        if len(possibilities_direction) > 0:
+            select_direction = random.choice(possibilities_direction)
+
+            # move with selected vehicle to selected direction
+            game.move(select_vehicle, select_direction)
+            print(f"Move: Vehicle {select_vehicle} - Direction {select_direction}")
+            game.show_board()
+            print('-------------------')
+            attempt += 1
+
+    print(f"Solved the puzzle in {attempt} attempts.")
