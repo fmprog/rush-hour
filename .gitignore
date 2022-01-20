@@ -1,2 +1,6 @@
-# personal file
+# personal files
 emily.py
+
+# pychace files
+__pycache__/
+
