@@ -8,9 +8,10 @@ class Game:
     def __init__(self, game, size):
         '''Creates the game'''
         self.size = size
-        self.exit = size - 2
+        self.exit = self.get_exit()
         self.board = self.grid()
         self.vehicles = self.load_vehicles(game)
+        self.moves = {}
         
         # test if movement works:
         """
@@ -223,3 +224,36 @@ class Game:
 
         else:
             print("Vehicle does not exist")
+
+    def move_back(self, uid, move):
+        """
+        Moves vehicle back one step
+        """
+        if move == 'L' or move == 'R':
+            if move == 'L':
+                move = 'R'
+            else:
+                move = 'L'
+        else:
+            if move == 'D':
+                move = 'U'
+            else:
+                move = 'D'
+
+        self.move(uid, move)
+
+    def get_exit(self):
+        """
+        The exit coordinates for each board.
+        """
+        if self.size == 6:
+            exit_coor = [4, 2]
+        elif self.size == 9:
+            exit_coor = [7, 4]
+        elif self.size == 12:
+            exit_coor = [10, 5]
+        
+        return exit_coor
+
+
+
