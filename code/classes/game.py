@@ -8,22 +8,10 @@ class Game:
     def __init__(self, game, size):
         '''Creates the game'''
         self.size = size
-        self.exit = self.get_exit()
         self.board = self.grid()
         self.vehicles = self.load_vehicles(game)
         self.moves = {}
         
-        # test if movement works:
-        """
-        self.moving = self.move('A', 'L')
-        self.moving = self.move('C', 'L')
-        self.moving = self.move('G', 'U')
-        self.moving = self.move('A', 'R')
-        self.moving = self.move('G', 'D')
-        self.moving = self.move('A', 'U')
-        self.moving = self.move('A', 'R')
-        """
-
 
     def grid(self):
         """
@@ -43,6 +31,20 @@ class Game:
                 print(item, end ="")
                 print(" ", end="")
             print()
+
+
+    def copy(self):
+        """
+        Returns a copy of self.
+        """
+        new = self
+
+        # Update the board after copy
+        for row in range(len(self.board)):
+            for col in range(len(self.board[row])):
+                new.board[row][col] = self.board[row][col]
+
+        return new
 
 
     def load_vehicles(self, game):
@@ -81,13 +83,49 @@ class Game:
 
         return vehicles
     
-    """
-    def possibilities():
-        
-        #List all vehicles that can be moved
-        
-    """
 
+    def possible_direction(self, select_vehicle):
+        """
+        text
+        """
+        possibilities_direction = []
+
+        if self.vehicles[select_vehicle].orientation == 'H':
+
+                # check if movement to the right is possible
+                front_row_coord = self.vehicles[select_vehicle].position[-1][0]
+                front_col_coord = self.vehicles[select_vehicle].position[-1][1]
+
+                if front_col_coord + 1 != self.size and self.board[front_row_coord][front_col_coord + 1] == 0:
+                    possibilities_direction.append('R')
+
+                # check if movement to the left is possible
+                front_row_coord = self.vehicles[select_vehicle].position[0][0]
+                front_col_coord = self.vehicles[select_vehicle].position[0][1]
+
+                if front_col_coord - 1 >= 0 and self.board[front_row_coord][front_col_coord - 1] == 0:
+                    possibilities_direction.append('L')
+
+        else:
+
+                # check if movement up is possible
+                front_row_coord = self.vehicles[select_vehicle].position[0][0]
+                front_col_coord = self.vehicles[select_vehicle].position[0][1]
+
+                # check if movement is possible
+                if self.vehicles[select_vehicle].position[0][0] - 1 >= 0 and self.board[front_row_coord - 1][front_col_coord] == 0:
+                    possibilities_direction.append('U')
+                
+                # check if movement down is possible
+                front_row_coord = self.vehicles[select_vehicle].position[-1][0]
+                front_col_coord = self.vehicles[select_vehicle].position[-1][1]
+
+                # check if movement is possible
+                if self.vehicles[select_vehicle].position[-1][0] + 1 != self.size and self.board[front_row_coord + 1][front_col_coord] == 0:
+                    possibilities_direction.append('D')
+
+        return possibilities_direction
+ 
 
     def move(self, uid, move):
         """
@@ -242,18 +280,21 @@ class Game:
 
         self.move(uid, move)
 
-    def get_exit(self):
+    def is_solved(self):
         """
-        The exit coordinates for each board.
+        Checks if red car is located in front of the exit and puzzle is solved
         """
         if self.size == 6:
-            exit_coor = [4, 2]
+            exit_column = 4
         elif self.size == 9:
-            exit_coor = [7, 4]
+            exit_column = 7
         elif self.size == 12:
-            exit_coor = [10, 5]
+            exit_column = 10
         
-        return exit_coor
+        if self.vehicles['X'].position[0][1] == exit_column:
+            return True
 
+        else:
+            return False
 
 

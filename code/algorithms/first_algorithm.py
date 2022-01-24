@@ -51,22 +51,33 @@ def random_solver(game):
         if len(possibilities_direction) > 0:
             select_direction = random.choice(possibilities_direction)
             
+            """ Delete the following imo:
             # check if state has been visited before
             copy_board = copy.deepcopy(game.board)
             print(copy_board)
             copy_board.move(select_vehicle, select_direction)
             print(copy_board)
-
-            # if 
+            """
 
             # move with selected vehicle to selected direction
             game.move(select_vehicle, select_direction)
-            print(f"Move: Vehicle {select_vehicle} - Direction {select_direction}")
-            game.show_board()
-            print(f"This is the deep copy {copy_board}")
-            print('-------------------')
-            states[attempt] = game.board
-            attempt += 1
+
+            # check if the state is in the archive. If it is, undo the move.
+            # print(f"print the states: {states}")
+            print(f"game board: {game.board}")
+            if game.board in states:
+                reset = attempt - 1
+                print(f"old board: {game.board}")
+                game.board = states[reset]
+                print(f"reset board: {game.board}")
+
+            else:
+                print(f"Move: Vehicle {select_vehicle} - Direction {select_direction}")
+                game.show_board()
+                print('-------------------')
+                states[attempt] = game.board
+                attempt += 1
+                print(states)
+
 
     print(f"Solved the puzzle in {attempt} attempts.")
-    print(states)
