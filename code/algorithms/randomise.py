@@ -4,7 +4,6 @@ import copy
 
 def random_solver(game):
 
-    X = game.vehicles['X']
     attempt = 1
     
     while game.is_solved() == False:
