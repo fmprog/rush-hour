@@ -8,8 +8,8 @@ class DepthFirst:
     def __init__(self, game):
         self.game = game.copy()
         self.states = [self.game]
-        self.start_boad = game
-        self.unique_states = []
+        self.start_board = game
+        self.unique_states = [game.board.tolist()]
         self.path = {}
 
 
@@ -17,22 +17,30 @@ class DepthFirst:
         """
         Runs the algorithm until a solution is found
         """
-       
+        #counter = 0
         print("start!")
         #while len(self.states) > 0:
-        for i in range(4):
+        #and counter < 2
+        for i in range(3):
+
+            for state in self.states:
+                print(i)
+                state.show_board_nomove()
+
             new_board = self.get_next_state()
-            print("This is the new board:")
-            new_board.show_board_nomove()
+            #print("This is the new board:")
+            #new_board.show_board_nomove()
 
             # check if solution has been found
             if new_board.is_solved():
+                #counter += 1
                 # stop the program
                 # break
 
                 # continue to look for a better solution
                 moves = self.find_path(new_board)
                 length_path = len(moves)
+
                 print(f"solved the game in {length_path} moves")
                 print(f"Look at the sequence: {moves}")
                 
@@ -66,16 +74,18 @@ class DepthFirst:
 
                 # move the vehicle
                 copy_game.move(vehicle, direction)
- 
-                # if this state has not been reached before add it to the queue
-                if copy_game.board not in self.unique_states:
+
+                #print("unique states")
+                #print(self.unique_states)
+
+                list_board = copy_game.board.tolist()
+                if list_board not in self.unique_states:
                     self.states.insert(0, copy_game)
-                    self.unique_states.append(copy_game.board)
-                    
+                    self.unique_states.append(list_board)
+
                     # add board and move to the current path
                     self.path[copy_game] = [new_board, [vehicle, direction]]
-
-                    #self.children[copy_game] = [game, [car, direction]]
+                    #print(self.path)
 
 
     def print(self):
