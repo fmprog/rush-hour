@@ -17,43 +17,31 @@ class DepthFirst:
         """
         Runs the algorithm until a solution is found
         """
-        #counter = 0
-        print("start!")
-        #while len(self.states) > 0:
-        #and counter < 2
-        for i in range(3):
 
-            for state in self.states:
-                print(i)
-                state.show_board_nomove()
+        while len(self.states) > 0:
 
             new_board = self.get_next_state()
-            #print("This is the new board:")
-            #new_board.show_board_nomove()
 
             # check if solution has been found
             if new_board.is_solved():
-                #counter += 1
-                # stop the program
-                # break
 
-                # continue to look for a better solution
+                # find the first solution
                 moves = self.find_path(new_board)
                 length_path = len(moves)
 
                 print(f"solved the game in {length_path} moves")
                 print(f"Look at the sequence: {moves}")
+                break
                 
             else:
                 self.build_children(new_board)
             
 
-
     def get_next_state(self):
             """
             Method that gets the next state from the list of states.
             """
-            return self.states.pop(0)
+            return self.states.pop()
                         
 
     def build_children(self, new_board):
@@ -80,7 +68,7 @@ class DepthFirst:
 
                 list_board = copy_game.board.tolist()
                 if list_board not in self.unique_states:
-                    self.states.insert(0, copy_game)
+                    self.states.append(copy_game)
                     self.unique_states.append(list_board)
 
                     # add board and move to the current path
