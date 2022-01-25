@@ -95,21 +95,21 @@ class Game:
 
         if self.vehicles[select_vehicle].orientation == 'H':
 
-                # check if movement to the right is possible
-                front_row_coord = self.vehicles[select_vehicle].position[-1][0]
-                front_col_coord = self.vehicles[select_vehicle].position[-1][1]
+            # check if movement to the right is possible
+            front_row_coord = self.vehicles[select_vehicle].position[-1][0]
+            front_col_coord = self.vehicles[select_vehicle].position[-1][1]
 
-                if front_col_coord + 1 != self.size and self.board[front_row_coord][front_col_coord + 1] == 0:
-                    possibilities_direction.append('R')
+            if front_col_coord + 1 != self.size and self.board[front_row_coord][front_col_coord + 1] == 0:
+                possibilities_direction.append('R')
 
-                # check if movement to the left is possible
-                front_row_coord = self.vehicles[select_vehicle].position[0][0]
-                front_col_coord = self.vehicles[select_vehicle].position[0][1]
+            # check if movement to the left is possible
+            front_row_coord = self.vehicles[select_vehicle].position[0][0]
+            front_col_coord = self.vehicles[select_vehicle].position[0][1]
 
-                if front_col_coord - 1 >= 0 and self.board[front_row_coord][front_col_coord - 1] == 0:
-                    possibilities_direction.append('L')
+            if front_col_coord - 1 >= 0 and self.board[front_row_coord][front_col_coord - 1] == 0:
+                possibilities_direction.append('L')
 
-        else:
+        elif self.vehicles[select_vehicle].orientation == 'V':
 
                 # check if movement up is possible
                 front_row_coord = self.vehicles[select_vehicle].position[0][0]
@@ -135,74 +135,137 @@ class Game:
         Moves vehicle in the given direction if move is valid
         """
 
-        # check direction of movement
-        if move == 'R':
+        # check if vehicle is on the board
+        if uid in self.vehicles.keys():
+
+            # check orientation of vehicle
+            if self.vehicles[uid].orientation == 'H':
+
+                # check direction of movement
+                if move == 'R':
+                    
+                    # define coordinates of front of vehicle
+                    front_row_coord = self.vehicles[uid].position[-1][0] 
+                    front_col_coord = self.vehicles[uid].position[-1][1] 
+
+                    # check if movement is possible
+                    if front_col_coord + 1 != self.size and self.board[front_row_coord][front_col_coord + 1] == 0:
             
-            # define coordinates of back of vehicle
-            back_row_coord = self.vehicles[uid].position[0][0] 
-            back_col_coord = self.vehicles[uid].position[0][1] 
+                        # define coordinates of back of vehicle
+                        back_row_coord = self.vehicles[uid].position[0][0] 
+                        back_col_coord = self.vehicles[uid].position[0][1] 
+                        
+                        # set previous coordinates of vehicle to zero
+                        self.board[back_row_coord][back_col_coord] = 0
+
+                        # set new coordinates of vehicle after movement
+                        for i in range(self.vehicles[uid].length):
+                            self.vehicles[uid].position[i][1] += 1
+                        
+                        # adjust postion of vehicle on the board
+                        for i in self.vehicles[uid].position:
+                            self.board[i[0]][i[1]] = uid
+                        
+                    else: 
+                        print("Out of bound")
+                    
+
+                elif move == 'L':
+
+                    # define coordinates of front of vehicle
+                    front_row_coord = self.vehicles[uid].position[0][0] 
+                    front_col_coord = self.vehicles[uid].position[0][1] 
+
+                    # check if movement is possible
+                    if front_col_coord - 1 >= 0 and self.board[front_row_coord][front_col_coord - 1] == 0:
+                        
+                        # define coordinates of back of vehicle
+                        back_row_coord = self.vehicles[uid].position[-1][0] 
+                        back_col_coord = self.vehicles[uid].position[-1][1] 
+                        
+                        # set previous coordinates to zero
+                        self.board[back_row_coord][back_col_coord] = 0
+
+                        # set new coordinates of vehicle after movement
+                        for i in range(self.vehicles[uid].length):
+                            self.vehicles[uid].position[i][1] -= 1
+
+                        # adjust postion of vehicle on the board
+                        for i in self.vehicles[uid].position:
+                            self.board[i[0]][i[1]] = uid
+                        
+                    else: 
+                        print("Out of bound")
+
+                    
+                else:
+                    print("Invalid input")
+
+            elif self.vehicles[uid].orientation == 'V':
+
+                if move == 'U':
+
+                    # define coordinates of front of vehicle
+                    front_row_coord = self.vehicles[uid].position[0][0] 
+                    front_col_coord = self.vehicles[uid].position[0][1] 
+
+                    # check if movement is possible
+                    if self.vehicles[uid].position[0][0] - 1 >= 0 and self.board[front_row_coord - 1][front_col_coord] == 0:
+                    
+                        # define coordinates of back of vehicle
+                        back_row_coord = self.vehicles[uid].position[-1][0] 
+                        back_col_coord = self.vehicles[uid].position[-1][1] 
+                        
+                        # set previous coordinates to zero
+                        self.board[back_row_coord][back_col_coord] = 0
+
+                        # set new coordinates of vehicle after movement
+                        for i in range(self.vehicles[uid].length):
+                            self.vehicles[uid].position[i][0] -= 1
+                        
+                        # adjust postion of vehicle on the board
+                        for i in self.vehicles[uid].position:
+                            self.board[i[0]][i[1]] = uid
+
+                    else: 
+                        print("Out of bound")
+        
+                elif move == 'D':
+                    
+                    # define coordinates of front of vehicle
+                    front_row_coord = self.vehicles[uid].position[-1][0] 
+                    front_col_coord = self.vehicles[uid].position[-1][1] 
+
+                    # check if movement is possible
+                    if self.vehicles[uid].position[-1][0] + 1 != self.size and self.board[front_row_coord + 1][front_col_coord] == 0:
+                        
+                        # define coordinates of back of vehicle
+                        back_row_coord = self.vehicles[uid].position[0][0] 
+                        back_col_coord = self.vehicles[uid].position[0][1] 
+                        
+                        # set previous coordinates to zero
+                        self.board[back_row_coord][back_col_coord] = 0
+
+                        # set new coordinates of vehicle after movement
+                        for i in range(self.vehicles[uid].length):
+                            self.vehicles[uid].position[i][0] += 1
+                        
+                        # adjust postion of vehicle on the board
+                        for i in self.vehicles[uid].position:
+                            self.board[i[0]][i[1]] = uid
+                        
+                    else: 
+                        print("Out of bound")
+
+                else:
+                    print("Invalid input") 
             
-            # set previous coordinates of vehicle to zero
-            self.board[back_row_coord][back_col_coord] = 0
+            else:
+                print("Invalid input") 
 
-            # set new coordinates of vehicle after movement
-            for i in range(self.vehicles[uid].length):
-                self.vehicles[uid].position[i][1] += 1
-                
-            # adjust postion of vehicle on the board
-            for i in self.vehicles[uid].position:
-                self.board[i[0]][i[1]] = uid
+        else:
+            print("Vehicle does not exist")
 
-        elif move == 'L':
-
-            # define coordinates of back of vehicle
-            back_row_coord = self.vehicles[uid].position[-1][0] 
-            back_col_coord = self.vehicles[uid].position[-1][1] 
-            
-            # set previous coordinates to zero
-            self.board[back_row_coord][back_col_coord] = 0
-
-            # set new coordinates of vehicle after movement
-            for i in range(self.vehicles[uid].length):
-                self.vehicles[uid].position[i][1] -= 1
-
-            # adjust postion of vehicle on the board
-            for i in self.vehicles[uid].position:
-                self.board[i[0]][i[1]] = uid
-                
-        elif move == 'U':
-
-            # define coordinates of back of vehicle
-            back_row_coord = self.vehicles[uid].position[-1][0] 
-            back_col_coord = self.vehicles[uid].position[-1][1] 
-            
-            # set previous coordinates to zero
-            self.board[back_row_coord][back_col_coord] = 0
-
-            # set new coordinates of vehicle after movement
-            for i in range(self.vehicles[uid].length):
-                self.vehicles[uid].position[i][0] -= 1
-            
-            # adjust postion of vehicle on the board
-            for i in self.vehicles[uid].position:
-                self.board[i[0]][i[1]] = uid
-
-        elif move == 'D':
-                
-            # define coordinates of back of vehicle
-            back_row_coord = self.vehicles[uid].position[0][0] 
-            back_col_coord = self.vehicles[uid].position[0][1] 
-            
-            # set previous coordinates to zero
-            self.board[back_row_coord][back_col_coord] = 0
-
-            # set new coordinates of vehicle after movement
-            for i in range(self.vehicles[uid].length):
-                self.vehicles[uid].position[i][0] += 1
-            
-            # adjust postion of vehicle on the board
-            for i in self.vehicles[uid].position:
-                self.board[i[0]][i[1]] = uid
 
 
     def is_solved(self):

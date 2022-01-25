@@ -20,6 +20,7 @@ class DepthFirst:
        
         while len(self.states) > 0: 
             new_board = self.get_next_state()
+
             # check if solution has been found
             if new_board.is_solved():
                 # stop the program
@@ -33,6 +34,7 @@ class DepthFirst:
                 
             else:
                 self.build_children(new_board)
+            
 
 
     def get_next_state(self):
@@ -46,7 +48,10 @@ class DepthFirst:
 
         # obtain the possible directions for each vehicle in the game
         for vehicle in self.game.vehicles:
+            print(vehicle)
+
             possible_directions = self.game.possible_direction(vehicle)
+            print(possible_directions)
 
             # for each possible move on the board, make a copy of the game and play the move
             for direction in possible_directions:
@@ -54,10 +59,10 @@ class DepthFirst:
                 copy_game = copy.deepcopy(game)
 
                 # move the vehicle
+                copy_game.show_board(vehicle, direction)
                 copy_game.move(vehicle, direction)
+                copy_game.show_board(vehicle, direction)
  
-                #print(copy_game)
-                print(self.unique_states)
                 # if this state has not been reached before add it to the queue
                 if copy_game not in self.unique_states:
                     self.states.insert(0, copy_game)
