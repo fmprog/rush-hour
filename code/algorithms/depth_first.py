@@ -8,85 +8,90 @@ class DepthFirst:
     def __init__(self, game):
         self.game = game.copy()
         self.states = [self.game]
+        self.start_boad = game
         self.unique_states = set()
-        self.children = {}
-
-    def print(self):
-        for i in self.states:
-            i.show_board()
-
-
-    def get_next_state(self):
-        """
-        Method that gets the next state from the list of states.
-        """
-        return self.states.pop(0)
-
-
-    def build_children(self, game):
-
-        for car in self.game.vehicles:
-            possible_directions = self.game.possible_direction(car)
-            for direction in possible_directions:
-                # create new copy of the game
-                copy_game = game.copy()
-
-                # move the car
-                copy_game.move(car, direction)
- 
-                # if the state is unique save it to states
-                if copy_game not in self.unique_states:
-                    self.unique_states.add(copy_game)
-                    self.states.insert(0, copy_game)
-                    self.children[copy_game] = [game, [car, direction]]
+        self.path = {}
 
 
     def run(self):
         """
         Runs the algorithm until a solution is found
         """
-        # select the initial game board
-        # start_board = self.states[0]
-
+       
         while len(self.states) > 0: 
             new_board = self.get_next_state()
-             
-            # if: als oplossing is gevonden, geef de path en stop het programma
+            # check if solution has been found
             if new_board.is_solved():
                 # stop the program
                 # break
 
-                # continue looking for a better solution
-                self.check_solution(new_board)
+                # continue to look for a better solution
+                moves = self.find_path(new_board)
+                length_path = len(moves)
+                print(f"solved the game in {length_path} moves")
+                print(f"Look at the sequence: {moves}")
                 
-            # else: bekijk de volgende children
             else:
                 self.build_children(new_board)
 
 
-    def check_solution(self, new_board):
+    def get_next_state(self):
+            """
+            Method that gets the next state from the list of states.
+            """
+            return self.states.pop(0)
+                        
+
+    def build_children(self, game):
+
+        # obtain the possible directions for each vehicle in the game
+        for vehicle in self.game.vehicles:
+            possible_directions = self.game.possible_direction(vehicle)
+
+            # for each possible move on the board, make a copy of the game and play the move
+            for direction in possible_directions:
+                # create a copy of the game
+                copy_game = copy.deepcopy(game)
+
+                # move the vehicle
+                copy_game.move(vehicle, direction)
+ 
+                #print(copy_game)
+                print(self.unique_states)
+                # if this state has not been reached before add it to the queue
+                if copy_game not in self.unique_states:
+                    self.states.insert(0, copy_game)
+                    self.unique_states.add(copy_game)
+                    
+                    # add board and move to the current path
+                    self.path[copy_game] = [game, [vehicle, direction]]
+
+                    #self.children[copy_game] = [game, [car, direction]]
+
+
+    def print(self):
+        for i in self.states:
+            i.show_board()
+
+
+    def find_path(self, new_board):
         """
-        Checks and accepts better solutions than the current solution.
+        Creates path
         """
-        # bereken de lengte van het laatst uitgerekende pad 
-        length_new_path = len(new_board.create_path(new_board))
+        moves = []
 
-        # haal het beste pad op
-        length_old_path = len(new_board.best_path)
+        # new_board represents the winning board
+        while new_board != self.start_board:
+            # add move to front of list 
+            moves.insert(0, self.path[new_board][1])
 
-        if length_new_path < length_old_path:
-            self.best_solution = new_board
-            self.best_path = new_board.path
+            # trace back to previous board
+            new_board = self.path[new_board][0]
 
-            print(f"New best path: {self.best_path} steps")
+        return moves
 
 
-    def create_path(self, new_board):
-        """
-        Recreates the path of a solution
-        """
-        if self.children
-        self.solution = self.children + self.solution
+
         
 
 

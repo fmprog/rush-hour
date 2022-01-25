@@ -1,7 +1,7 @@
 from code.classes.game import Game
 import random
 from code.algorithms import randomise
-#from code.algorithms import depth_first
+from code.algorithms import depth_first
 
 
 if __name__ == "__main__":
@@ -9,7 +9,7 @@ if __name__ == "__main__":
     game = Game("Rushhour6x6_1.csv", 6)
     #game.show_board()
 
-    #depth_first.DepthFirst(game).print()
+    depth_first.DepthFirst(game).run()
 
-    randomise.random_solver(game)
+    #randomise.random_solver(game)
 
