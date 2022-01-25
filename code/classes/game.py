@@ -36,6 +36,21 @@ class Game:
         print('-------------------')
 
 
+    def show_board_nomove(self):
+        """
+        Returns current state of board
+        """
+        #print(f"Move: Vehicle {selected_vehicle} - Direction {selected_direction}")
+        for row in self.board:
+            for item in row:
+                print(" ", end="")
+                print(item, end ="")
+                print(" ", end="")
+            print()
+        print('-------------------')
+
+
+
     def copy(self):
         """
         Returns a copy of self.
@@ -109,7 +124,7 @@ class Game:
             if front_col_coord - 1 >= 0 and self.board[front_row_coord][front_col_coord - 1] == 0:
                 possibilities_direction.append('L')
 
-        elif self.vehicles[select_vehicle].orientation == 'V':
+        else:
 
                 # check if movement up is possible
                 front_row_coord = self.vehicles[select_vehicle].position[0][0]
