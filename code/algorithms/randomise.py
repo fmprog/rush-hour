@@ -4,7 +4,7 @@ import random
 def random_solver(game):
 
     attempt = 1
-    
+   
     while game.is_solved() == False:
    
         # randomly select a vehicle to move
