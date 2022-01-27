@@ -10,6 +10,8 @@ class DepthFirst:
         self.start_board = game
         self.unique_states = [game.board.tolist()]
         self.path = {}
+        self.moves = []
+        self.solution = []
 
 
     def run(self):
@@ -24,11 +26,11 @@ class DepthFirst:
             # Check if puzzle is solved
             if new_board.is_solved():
                 # Create the sequence of moves that lead to the winning position and count the number of moves
-                moves = self.find_path(new_board)
-                length_path = len(moves)
+                self.moves = self.find_path(new_board)
+                length_path = len(self.moves)
 
                 print(f"This puzzle was solved with {length_path} moves")
-                print(f"The sequence of this solution is: {moves}")
+                print(f"The sequence of this solution is: {self.moves}")
 
                 # Quit after puzzle is solved once
                 break
@@ -78,16 +80,26 @@ class DepthFirst:
         Creates path
         """
         moves = []
+        solution = []
 
         # new_board represents the winning board
         while new_board != self.start_board:
             # add move to front of list 
             moves.insert(0, self.path[new_board][1])
+            solution.insert(0, [new_board, self.path[new_board][1]])
 
             # trace back to previous board
             new_board = self.path[new_board][0]
+            
+        self.solution = solution
 
         return moves
+    
+    def return_solution(self):
+        '''
+        Returns the path and the corresponding boards.
+        '''
+        return self.solution
 
 
 

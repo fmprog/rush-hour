@@ -2,6 +2,7 @@ from code.classes.game import Game
 from code.algorithms import randomise
 from code.algorithms import depth_first
 from code.algorithms import breadth_first
+from code.algorithms import hill_climber
 
 
 if __name__ == "__main__":
@@ -16,9 +17,14 @@ if __name__ == "__main__":
     #randomise.random_solver(game)
 
     # --------------------------- Breadth First Aglorithm -------------------
-    breadth = breadth_first.BreadthFirst(game)
-    breadth.run()
+    # breadth = breadth_first.BreadthFirst(game)
+    # breadth.run()
 
     # --------------------------- Depth First Algorithm ---------------------
-    #depth = depth_first.DepthFirst(game)
-    #depth.run()
+    depth = depth_first.DepthFirst(game)
+    depth.run()
+    solution = depth.return_solution()
+
+    # --------------------------- Hill Climber Algorithm ---------------------
+    hill_climber = hill_climber.HillClimber(game, solution)
+    hill_climber.run(20)
