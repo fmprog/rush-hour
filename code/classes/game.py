@@ -191,7 +191,7 @@ class Game:
                 self.board[i[0]][i[1]] = uid
             
 
-    def is_solved(self, hillclimber = False):
+    def is_solved(self, board = False, hillclimber = False):
         """
         Checks if car X is located in front of the exit and puzzle is solved
         """
@@ -205,7 +205,8 @@ class Game:
                 return False
         
         else:
-            if hillclimber[0] == hillclimber[1]:
+
+            if board.board.tolist() == hillclimber[1].board.tolist():
                 return True
 
             else:

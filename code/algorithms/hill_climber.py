@@ -12,14 +12,9 @@ class HillClimber:
         Each improvement or equivalent solution is kept for the next iteration.
         """
         self.start_board = game
-        # print(solution)
-        # self.first_sol = DepthFirst(game).run()
-        # self.first_sol_path = self.first_sol.path
-        # self.path = copy.deepcopy(self.first_sol)
         self.solution = solution
         self.solution_len = len(self.solution)
-        print(solution)
-        print(f'this is sol len: {self.solution_len}')
+        print(f'this is the current sol len: {self.solution_len}')
     
     def mutate_path(self, new_path):
         """
@@ -29,7 +24,6 @@ class HillClimber:
         position = random.randint(5, self.solution_len)
         print(f'this is the position: {position}')
         start_point = self.solution[position - 1][0]
-        print(f' this is the start_point: {start_point}')
 
         end_point_position = random.randint(position, self.solution_len)
 
@@ -41,22 +35,25 @@ class HillClimber:
 
         # The path towards the starting point remains the same
         beginning_path = self.solution[:position]
-        end_path = self.solution[(end_point_position + 1):]
+        end_path = self.solution[end_point_position:]
 
 
-        # Continue from this board by using the breadth first algorithm
-        # while not self.start_board.is_solved(hillclimber = [start_point, end_point]):
+        # Continue from this board by using the breadth first algorithm untill we find the end point
         breadth = BreadthFirst(start_point, hillclimber = [start_point, end_point])
         breadth.run()
-        
-
-        # print(breadth.solution)
-        # print(new_path)
-        # new = new_path.extend(breadth.solution)
+        print("start")
+        print(f"length begin = {len(beginning_path)}")
+        for i in beginning_path:
+            print(i[1])
+        print("middle")
+        print(f"length middle= {len(breadth.solution)}")
+        for i in breadth.solution:
+            print(i[1])
+        print("end")
+        print(f"length end = {len(end_path)}")
+        for i in end_path:
+            print(i[1])
         new_path = beginning_path + breadth.solution + end_path
-        
-        # print(new_path)
-        # print(len(new_path))
 
         return(new_path)
 
@@ -65,16 +62,20 @@ class HillClimber:
         Checks and accepts better solutions than the current solution.
         """
         new_path_len = len(new_path)
-        print(new_path_len)
+        print(f"new path length: {new_path_len}")
         old_path_len = self.solution_len
 
         # We are looking for maps that cost less!
-        if new_path_len <= old_path_len:
+        if new_path_len < old_path_len:
             self.solution = new_path
             self.solution_len = new_path_len
-        print(self.solution_len)
+        print(f"solution length = {self.solution_len}")
+        print("SOLUTION:")
+        j = 1
         for i in self.solution:
+            print(j)
             print(i[1])
+            j += 1
 
     def run(self, iterations):
         """

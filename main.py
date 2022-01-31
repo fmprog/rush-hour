@@ -28,4 +28,4 @@ if __name__ == "__main__":
 
     # --------------------------- Hill Climber Algorithm ---------------------
     hill_climber = hill_climber.HillClimber(game, solution)
-    hill_climber.run(10)
+    hill_climber.run(30)

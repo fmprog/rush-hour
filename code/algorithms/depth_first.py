@@ -12,19 +12,18 @@ class DepthFirst:
         self.path = {}
         self.moves = []
         self.solution = []
+        self.board = hillclimber
 
 
     def run(self):
         """
         Method that runs the algorithm untill a solution to the puzzle is found
         """
-
         while len(self.states) > 0:
-
             new_board = self.get_next_state()
-
+            # print(self.board)
             # Check if puzzle is solved
-            if new_board.is_solved():
+            if new_board.is_solved(board = new_board, hillclimber = self.board):
                 # Create the sequence of moves that lead to the winning position and count the number of moves
                 self.moves = self.find_path(new_board)
                 length_path = len(self.moves)
@@ -51,7 +50,6 @@ class DepthFirst:
         """
         Build children and add to the stack
         """
-
         # Obtain the possible directions for each vehicle in the game
         for vehicle in new_board.vehicles:
 
