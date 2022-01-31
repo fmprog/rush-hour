@@ -5,7 +5,7 @@ class DepthFirst:
     """
     A Depth First algorithm  
     """
-    def __init__(self, game):
+    def __init__(self, game, hillclimber = False):
         self.states = [game]
         self.start_board = game
         self.unique_states = [game.board.tolist()]

@@ -191,14 +191,23 @@ class Game:
                 self.board[i[0]][i[1]] = uid
             
 
-    def is_solved(self):
+    def is_solved(self, hillclimber = False):
         """
         Checks if car X is located in front of the exit and puzzle is solved
         """
-        car_X_coordinate_left = self.vehicles['X'].position[0][1]
+        if hillclimber is False:
+            car_X_coordinate_left = self.vehicles['X'].position[0][1]
 
-        if car_X_coordinate_left == self.exit:
-            return True
+            if car_X_coordinate_left == self.exit:
+                return True
 
+            else:
+                return False
+        
         else:
-            return False
+            if hillclimber[0] == hillclimber[1]:
+                return True
+
+            else:
+                return False
+        
