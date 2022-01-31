@@ -41,7 +41,7 @@ class HillClimber:
 
         # The path towards the starting point remains the same
         beginning_path = self.solution[:position]
-        end_path = self.solution[end_point_position:]
+        end_path = self.solution[(end_point_position + 1):]
 
 
         # Continue from this board by using the breadth first algorithm
@@ -54,6 +54,7 @@ class HillClimber:
         # print(new_path)
         # new = new_path.extend(breadth.solution)
         new_path = beginning_path + breadth.solution + end_path
+        
         # print(new_path)
         # print(len(new_path))
 
