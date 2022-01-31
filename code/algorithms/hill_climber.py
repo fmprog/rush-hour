@@ -20,22 +20,16 @@ class HillClimber:
         Changes the solution path from a random start point.
         """
 
-        # Pick a random position as a starting point
+        # Pick a random starting and ending position
         position = random.randint(5, self.solution_len)
-        
-        # Define a game object at our random starting position
-        start_point = self.solution[position - 1][0]
-
-        # Pick a random position as an ending point
         end_point_position = random.randint(position, self.solution_len)
-
-        # Define a game object at our random ending position
+        
+        # Define a game object at our random starting position and ending position
+        start_point = self.solution[position - 1][0]
         end_point = self.solution[end_point_position - 1][0]
         
-        # Define the beginning of the path 
+        # Define the beginning and ending of the path 
         beginning_path = self.solution[:position]
-        
-        # Define the ending of the path
         end_path = self.solution[end_point_position:]
 
         # Apply the breadth first algorithm starting from our random starting point to our random ending point
@@ -52,10 +46,8 @@ class HillClimber:
         Checks and accepts better solutions than the current solution.
         """
 
-        # Define the length of the newly created path
+        # Define the length of the newly created path and original path
         new_path_len = len(new_path)
-
-        # Define the length of our original path
         old_path_len = self.solution_len
 
         # Check if the newly created path is shorter than our original path
