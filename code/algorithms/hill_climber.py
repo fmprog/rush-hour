@@ -20,7 +20,7 @@ class HillClimber:
         Changes the solution path from a random start point.
         """
 
-        # Pick a random starting and ending position
+        # Pick a random start position and pick an end position to create an interval with a maximal length of 10
         position = random.randint(5, self.solution_len)
         end_point_position = position + 10
         if end_point_position > self.solution_len:
