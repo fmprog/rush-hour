@@ -8,51 +8,41 @@ from code.classes.game import Game
 class HillClimber:
     def __init__(self, game, solution):
         """
-        The HillClimber class .....
+        The HillClimber class takes a solution of any algorithm and applies the breadth algorithm to a certain interval of the current path of the solution.
         Each improvement or equivalent solution is kept for the next iteration.
         """
         self.start_board = game
         self.solution = solution
         self.solution_len = len(self.solution)
-        print(f'this is the current sol len: {self.solution_len}')
     
     def mutate_path(self, new_path):
         """
         Changes the solution path from a random start point.
         """
-        # Pick a random position to pick our starting point
+
+        # Pick a random position as a starting point
         position = random.randint(5, self.solution_len)
-        print(f'this is the position: {position}')
+        
+        # Define a game object at our random starting position
         start_point = self.solution[position - 1][0]
 
+        # Pick a random position as an ending point
         end_point_position = random.randint(position, self.solution_len)
 
-        print(f'this is the end_point_position: {end_point_position}')
-        print(f'len van solution: {len(self.solution)}')
-
+        # Define a game object at our random ending position
         end_point = self.solution[end_point_position - 1][0]
         
-
-        # The path towards the starting point remains the same
+        # Define the beginning of the path 
         beginning_path = self.solution[:position]
+        
+        # Define the ending of the path
         end_path = self.solution[end_point_position:]
 
-
-        # Continue from this board by using the breadth first algorithm untill we find the end point
+        # Apply the breadth first algorithm starting from our random starting point to our random ending point
         breadth = BreadthFirst(start_point, hillclimber = [start_point, end_point])
         breadth.run()
-        print("start")
-        print(f"length begin = {len(beginning_path)}")
-        for i in beginning_path:
-            print(i[1])
-        print("middle")
-        print(f"length middle= {len(breadth.solution)}")
-        for i in breadth.solution:
-            print(i[1])
-        print("end")
-        print(f"length end = {len(end_path)}")
-        for i in end_path:
-            print(i[1])
+
+        # Add the different parts of the path together to get a new complete path
         new_path = beginning_path + breadth.solution + end_path
 
         return(new_path)
@@ -61,21 +51,19 @@ class HillClimber:
         """
         Checks and accepts better solutions than the current solution.
         """
+
+        # Define the length of the newly created path
         new_path_len = len(new_path)
-        print(f"new path length: {new_path_len}")
+
+        # Define the length of our original path
         old_path_len = self.solution_len
 
-        # We are looking for maps that cost less!
+        # Check if the newly created path is shorter than our original path
         if new_path_len < old_path_len:
+
+            # Replace the original solution by our new path
             self.solution = new_path
             self.solution_len = new_path_len
-        print(f"solution length = {self.solution_len}")
-        print("SOLUTION:")
-        j = 1
-        for i in self.solution:
-            print(j)
-            print(i[1])
-            j += 1
 
     def run(self, iterations):
         """
@@ -85,10 +73,10 @@ class HillClimber:
         
         for iteration in range(iterations):
 
-            # Create a copy of the graph to simulate the change
+            # Create a copy of the game object to simulate the change
             old_solution = copy.deepcopy(self.solution)
 
-            # Create a new solution to the game
+            # Create a new solution of the game by calling mutate_path()
             new_solution = self.mutate_path(old_solution)
 
             # Accept the new solution if it is better
