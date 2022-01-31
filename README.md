@@ -22,7 +22,8 @@ Om de code te draaien met de standaardconfiguratie (bv. brute-force en voorbeeld
 python main.py
 ```
 ## Auteurs
-Ik
+Fabienne van Baren, Fé de Haan en Emily Timmerman
+
 ## Dankwoord
 StackOverflow
 minor programmeren van de UvA
