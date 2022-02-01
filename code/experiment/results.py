@@ -3,11 +3,19 @@ import time
 import csv
 
 start = time.time()
-n_runs = 0
+n_runs = 1
+header = []
+results = []
 
 while time.time() - start < 3600:
     print(f"run: {n_runs}")
-    subprocess.call(["timeout", "60", "python3", "random_algorithm.py"])
+    header.append(('Run ') + str(n_runs))
+    print(header)
+    subprocess.call(["timeout", "60", "python3", "randomise.py"])
+
+    result = 0
+    results.append(result)
+
 
     with open('countries.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
@@ -16,6 +24,6 @@ while time.time() - start < 3600:
         writer.writerow(header)
 
         # write multiple rows
-        writer.writerows(data)
+        writer.writerows(results)
 
     n_runs += 1
