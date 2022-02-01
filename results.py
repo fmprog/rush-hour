@@ -11,20 +11,21 @@ start = time.time()
 n_runs = 1
 header = []
 paths = []
-file = "randomise.py"
+file = "code/algorithms/randomise.py"
 game = "Rushhour6x6_1.csv"
 
 while time.time() - start < 3600:
 
     header.append(f'Run {n_runs}')
 
-    subprocess.call(["timeout", "60", "python3", "file"])
+    code = subprocess.call(["timeout", "60", "python3", "results.py"])
+    # # code = subprocess.call(["ping", "www.yahoo.com"])
 
     path = 0
     paths.append(path)
 
 
-    with open(f'results{file}.csv', 'w', encoding='UTF8', newline='') as f:
+    with open(f'results.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
 
         # write the header
@@ -35,23 +36,26 @@ while time.time() - start < 3600:
 
     n_runs += 1
 
-    # --------------------------- Histogram ---------------------
-    results = []
-    for i in range(100):
-        print(i)
-        hill = hill_climber.HillClimber(game, solution)
-        hill.run(100)
+    # # --------------------------- Histogram ---------------------
+    # results = []
+    # random = randomise.Randomise(game)
+    # random.run()
+    # solution = random.return_solution()
+    # for i in range(100):
+    #     print(i)
+    #     hill = hill_climber.HillClimber(game, solution)
+    #     hill.run(100)
 
-        result = hill.solution_len
-        results.append(result)
+    #     result = hill.solution_len
+    #     results.append(result)
 
-    print(f"{game} resultaten: {results}")
-    # Make bar plot
-    plt.hist(results, color="blue", bins=range(100))
+    # print(f"{game} resultaten: {results}")
+    # # Make bar plot
+    # plt.hist(results, color="blue", bins=range(100))
 
-    plt.xlabel("Lengte Pad")
-    plt.ylabel("Frequentie lengte pad")
-    plt.title(f"Resultaten Rush Hour {game}")
+    # plt.xlabel("Lengte Pad")
+    # plt.ylabel("Frequentie lengte pad")
+    # plt.title(f"Resultaten Rush Hour {game}")
 
-    # Show graphic
-    plt.savefig("9x9 bord")
+    # # Show graphic
+    # plt.savefig("9x9 bord")
