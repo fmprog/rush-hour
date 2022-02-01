@@ -8,6 +8,7 @@ n_runs = 1
 header = []
 paths = []
 file = "randomise.py"
+game = "Rushhour6x6_1.csv"
 
 while time.time() - start < 3600:
 
@@ -30,7 +31,7 @@ while time.time() - start < 3600:
 
     n_runs += 1
 
-    # --------------------------- Hill Climber Algorithm ---------------------
+    # --------------------------- Histogram ---------------------
     results = []
     for i in range(100):
         print(i)
@@ -40,13 +41,13 @@ while time.time() - start < 3600:
         result = hill.solution_len
         results.append(result)
 
-    print(f"Bord6x6_1 resultaten: {results}")
+    print(f"{game} resultaten: {results}")
     # Make bar plot
     plt.hist(results, color="blue", bins=range(100))
 
     plt.xlabel("Lengte Pad")
     plt.ylabel("Frequentie lengte pad")
-    plt.title("Resultaten Rush Hour Bord 4 9x9")
+    plt.title(f"Resultaten Rush Hour {game}")
 
     # Show graphic
     plt.savefig("9x9 bord")
