@@ -22,9 +22,11 @@ class HillClimber:
 
         # Pick a random start position and pick an end position to create an interval with a maximal length of 10
         position = random.randint(5, self.solution_len)
+        print(position)
         end_point_position = position + 10
         if end_point_position > self.solution_len:
             end_point_position = self.solution_len
+        print(end_point_position)
         
         # Define a game object at our random starting position and ending position
         start_point = self.solution[position - 1][0]

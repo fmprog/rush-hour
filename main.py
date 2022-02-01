@@ -15,17 +15,21 @@ if __name__ == "__main__":
     game = Game(gameboard, gamesize)
 
     # --------------------------- Random Algorithm --------------------------
-    #randomise.random_solver(game)
+    random = randomise.Randomise(game)
+    random.run()
+    solution = random.return_solution()
+
 
     # --------------------------- Breadth First Aglorithm -------------------
     # breadth = breadth_first.BreadthFirst(game)
     # breadth.run()
 
     # --------------------------- Depth First Algorithm ---------------------
-    depth = depth_first.DepthFirst(game)
-    depth.run()
-    solution = depth.return_solution()
+    # depth = depth_first.DepthFirst(game)
+    # depth.run()
+    # solution = depth.return_solution()
 
     # --------------------------- Hill Climber Algorithm ---------------------
+    print(solution)
     hill_climber = hill_climber.HillClimber(game, solution)
     hill_climber.run(30)
