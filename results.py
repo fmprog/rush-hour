@@ -2,6 +2,10 @@ import subprocess
 import time
 import csv
 import matplotlib as plt
+from code.algorithms import randomise
+from code.algorithms import depth_first
+from code.algorithms import breadth_first
+from code.algorithms import hill_climber
 
 start = time.time()
 n_runs = 1
@@ -14,7 +18,7 @@ while time.time() - start < 3600:
 
     header.append(f'Run {n_runs}')
 
-    subprocess.call([f'code/algorithms/{file}', "timeout", "60", "python3", file])
+    subprocess.call(["timeout", "60", "python3", "file"])
 
     path = 0
     paths.append(path)
