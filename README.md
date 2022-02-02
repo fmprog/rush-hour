@@ -9,12 +9,12 @@ This codebase is written in Python 3.8.10. No additional packages are required t
 
 ### Structure 
 Alle Python scripts staan in de folder Code. In de map Data zitten alle input waardes en in de map resultaten worden alle resultaten opgeslagen door de code.
-- */code:* contains all code for this project
-  - */code/algorithms:* contains all developed algorithms
-    - */code/algorithms/randomise.py*: finds a random solution to the puzzle by selecting at random vehicles and possible direction and playing these moves
-    - */code/algorithms/depth_first.py*: finds a depth first solution to the puzzle by vertically following one branch of moves until a solution is found
-    - */code/algorithms/breadh_first.py*: finds a breadth first solution to the puzzle horizontally by playing each possible move on every layer until a solution is found
-    - */code/algorithms/hill_climber.py*: improves a depth first or random solution by selection random parts of the solution and improving them with the breadth first algorithm
+- **/code:** contains all code for this project
+  - **/code/algorithms:** contains all developed algorithms
+    - **/code/algorithms/randomise.py**: finds a random solution to the puzzle by selecting at random vehicles and possible direction and playing these moves
+    - **/code/algorithms/depth_first.py**: finds a depth first solution to the puzzle by vertically following one branch of moves until a solution is found
+    - **/code/algorithms/breadh_first.py**: finds a breadth first solution to the puzzle horizontally by playing each possible move on every layer until a solution is found
+    - **/code/algorithms/hill_climber.py**: improves a depth first or random solution by selection random parts of the solution and improving them with the breadth first algorithm
   - */code/classes:* contains all classes
     -*/code/classes/vehicle.py*: contains all necessary attributes of a vehicle
     -*/code/classes/game.py*: contains functions to create the gameboard (grid), load the vehicles onto the board from a csv file, show the gameboard, find possible moves on the board and play moves, and a function to check if the current board is solved
