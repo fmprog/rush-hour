@@ -10,7 +10,6 @@ class DepthFirst:
         self.start_board = game
         self.unique_states = [game.board.tolist()]
         self.path = {}
-        self.moves = []
         self.solution = []
         self.board = hillclimber
 
@@ -21,15 +20,11 @@ class DepthFirst:
         """
         while len(self.states) > 0:
             new_board = self.get_next_state()
-            # print(self.board)
+
             # Check if puzzle is solved
             if new_board.is_solved(board = new_board, hillclimber = self.board):
                 # Create the sequence of moves that lead to the winning position and count the number of moves
                 self.moves = self.find_path(new_board)
-                length_path = len(self.moves)
-
-                print(f"This puzzle was solved with {length_path} moves")
-                print(f"The sequence of this solution is: {self.moves}")
 
                 # Quit after puzzle is solved once
                 break

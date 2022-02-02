@@ -10,6 +10,7 @@ class Randomise:
         self.current_game = game
         self.solution = []
 
+
     def run(self):
     
         while self.current_game.is_solved() == False:
@@ -36,7 +37,6 @@ class Randomise:
                 # update the current game
                 self.current_game = copy_game
 
-        print(f"Solved the puzzle in {len(self.solution)} attempts.")
 
     def return_solution(self):
         '''
