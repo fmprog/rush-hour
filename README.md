@@ -10,8 +10,11 @@ This codebase is written in Python 3.8.10. No additional packages are required t
 ### Structure 
 Alle Python scripts staan in de folder Code. In de map Data zitten alle input waardes en in de map resultaten worden alle resultaten opgeslagen door de code.
 - /code: contains all code for this project
--- /code/algorithms: contains all algorithms
---- /code/algorithms/breadh_first.py
+  - /code/algorithms: contains all algorithms
+    - /code/algorithms/randomise.py
+    - /code/algorithms/depth_first.py
+    - /code/algorithms/breadh_first.py
+    - /code/algorithms/hill_climber.py
 
 
 ### Test
