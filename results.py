@@ -1,61 +1,54 @@
-import subprocess
 import time
 import csv
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from code.algorithms import randomise
 from code.algorithms import depth_first
 from code.algorithms import breadth_first
 from code.algorithms import hill_climber
+from code.classes.game import Game
 
 start = time.time()
 n_runs = 1
-header = []
-paths = []
-file = "code/algorithms/randomise.py"
-game = "Rushhour6x6_1.csv"
+results = []
 
-while time.time() - start < 3600:
+start_time = time.time()
+while n_runs < 100:
 
-    header.append(f'Run {n_runs}')
+    # choose gameboard and gameboard size
+    algorithm_name = "Random"
+    gameboard = "Rushhour6x6_1.csv"
+    gamesize = 6
 
-    code = subprocess.call(["timeout", "60", "python3", "results.py"])
-    # # code = subprocess.call(["ping", "www.yahoo.com"])
+    # create game from input
+    game = Game(gameboard, gamesize)
+    algorithm_type = randomise.Randomise(game)
+    algorithm_type.run()
+    solution = algorithm_type.return_solution()
 
-    path = 0
-    paths.append(path)
-
-
-    with open(f'results.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-
-        # write the header
-        writer.writerow(header)
-
-        # write multiple rows
-        writer.writerows(paths)
+    results.append(len(solution))
 
     n_runs += 1
 
-    # # --------------------------- Histogram ---------------------
-    # results = []
-    # random = randomise.Randomise(game)
-    # random.run()
-    # solution = random.return_solution()
-    # for i in range(100):
-    #     print(i)
-    #     hill = hill_climber.HillClimber(game, solution)
-    #     hill.run(100)
+end_time = time.time()
+seconds = end_time - start_time 
 
-    #     result = hill.solution_len
-    #     results.append(result)
+# save the results in a csv file
+with open(f'Results{algorithm_name}{gameboard}', 'w', encoding='UTF8', newline='') as f:
+    writer = csv.writer(f)
 
-    # print(f"{game} resultaten: {results}")
-    # # Make bar plot
-    # plt.hist(results, color="blue", bins=range(100))
 
-    # plt.xlabel("Lengte Pad")
-    # plt.ylabel("Frequentie lengte pad")
-    # plt.title(f"Resultaten Rush Hour {game}")
+    # write multiple rows
+    for value in range(len(results)):
+        writer.writerow([f'Run {value + 1}', results[value]])
+    writer.writerow([f"Total time = {round(seconds, 5)} seconds."])
+    writer.writerow([f"Average time per run = {round((seconds / n_runs), 5)} seconds."])
+    
+# --------------------------- Histogram ---------------------
 
-    # # Show graphic
-    # plt.savefig("9x9 bord")
+plt.hist(results, color = "blue", bins = 100)
+plt.xlabel("Lengte Pad")
+plt.ylabel("Frequentie lengte pad")
+plt.title(f"Resultaten Rush Hour {gameboard}")
+
+# save graph
+plt.savefig(f"Random 6x6 game 1")
