@@ -3,14 +3,13 @@ from .depth_first import DepthFirst
 
 class BreadthFirst(DepthFirst):
     """"
-    A Depth First algorithm that builds a queue of graphs with a unique assignment of nodes for each instance.
-    Almost all of the functions are equal to those of the DepthFirst class, which is why
-    we use that as a parent class.
+    A Breadth First algorithm that solves the rush hour puzzle by building a queue of children boards and finding the first solution horizontally.  
+    The DepthFirst class is used as the parent class as all methods apart the the get_next_state method overlap. 
     """
+
 
     def get_next_state(self):
         """
-        Method that gets the next state from the list of states.
-        For Breadth First we need the first one; we use a queue.
+        Method that gets the next state from the queue of states.
         """
         return self.states.pop(0)

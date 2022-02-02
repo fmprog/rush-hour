@@ -35,7 +35,7 @@ class DepthFirst:
 
     def get_next_state(self):
         """
-        Method that gets the next state from the list of states.
+        Method that gets the next state from the stack of states.
         """
         return self.states.pop()
                         
