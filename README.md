@@ -1,8 +1,9 @@
 # Rush Hour
-Rush Hour is een ogenschijnlijk eenvoudig puzzeltje met een verrassend uitdagend karakter. In een veld van 6 hoog en 6 breed staat een rode auto en die moet naar de uitgang. Maar andere voertuigen versperren de weg; auto’s van twee eenheden lang en trucks van drie eenheden lang, die alleen in hun rijrichting bewogen mogen worden. Ze mogen niet draaien.
-Wij hebben een computerprogramma geschreven om de rode auto naar de uitgang te rijden.
+Rush Hour is a slide puzzle game in which a red car has to exit the board. This is not so easy, however, as the red car is blocked by multiple cars and trucks! The game's rules are simple - vehicles can only move in the direction of their orientation, are not allowed to turn, and cannot drive to spots where other vehicles are located - but finding the best solution to the puzzle is incredibly difficult, especially as the size of the gameboard increases!
 
-Plaatje ?
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+
+Therefore, our team set out to develop a good algorithm for a computer to find a fast and short solution to rush hour puzzles.
 
 ## Aan de slag
 ### Vereisten
