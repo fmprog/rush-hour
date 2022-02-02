@@ -15,6 +15,7 @@ class HillClimber:
         self.solution = solution
         self.solution_len = len(self.solution)
     
+
     def mutate_path(self, new_path):
         """
         Changes the solution path from a random start point.
@@ -52,6 +53,7 @@ class HillClimber:
 
         return(new_path)
 
+
     def check_solution(self, new_path):
         """
         Checks and accepts better solutions than the current solution.
@@ -67,6 +69,7 @@ class HillClimber:
             # Replace the original solution by our new path
             self.solution = new_path
             self.solution_len = new_path_len
+
 
     def run(self, iterations):
         """
@@ -84,6 +87,14 @@ class HillClimber:
 
             # Accept the new solution if it is better
             self.check_solution(new_solution)
+
+
+    def return_solution(self):
+        '''
+        Returns the path and the corresponding boards.
+        '''
+        return self.solution
+
 
             
         

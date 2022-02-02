@@ -7,16 +7,16 @@ from code.algorithms import hill_climber
 
 
 if __name__ == "__main__":
-    # Choose gameboard and gameboard size
+    # ------------------ Select gameboard and create game -------------------
     gameboard = "Rushhour6x6_1.csv"
     gamesize = 6
-
-    # Create game from input
     game = Game(gameboard, gamesize)
+
 
     # --------------------------- Random Algorithm --------------------------
     random = randomise.Randomise(game)
     random.run()
+
     solution = random.return_solution()
 
 
@@ -24,12 +24,19 @@ if __name__ == "__main__":
     # breadth = breadth_first.BreadthFirst(game)
     # breadth.run()
 
+    # solution = breadth.return_solution()
+
+
     # --------------------------- Depth First Algorithm ---------------------
     # depth = depth_first.DepthFirst(game)
     # depth.run()
+
     # solution = depth.return_solution()
 
+
     # --------------------------- Hill Climber Algorithm ---------------------
-    print(solution)
+
     hill_climber = hill_climber.HillClimber(game, solution)
     hill_climber.run(30)
+
+    solution = hill_climber.return_solution()
