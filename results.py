@@ -12,7 +12,7 @@ n_runs = 1
 results = []
 
 start_time = time.time()
-while n_runs < 100:
+while n_runs <= 100:
 
     # choose gameboard and gameboard size
     algorithm_name = "Random"
@@ -48,7 +48,7 @@ with open(f'Results{algorithm_name}{gameboard}', 'w', encoding='UTF8', newline='
 plt.hist(results, color = "blue", bins = 100)
 plt.xlabel("Lengte Pad")
 plt.ylabel("Frequentie lengte pad")
-plt.title(f"Resultaten Rush Hour {gameboard}")
+plt.title(f"Resultaten {algorithm_name} Algoritme {gameboard}")
 
 # save graph
-plt.savefig(f"Random 6x6 game 1")
+plt.savefig(f"{algorithm_name} {gameboard}")
