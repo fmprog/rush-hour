@@ -15,13 +15,13 @@ start_time = time.time()
 while n_runs <= 100:
 
     # choose gameboard and gameboard size
-    algorithm_name = "Random"
+    algorithm_name = "Breadth first"
     gameboard = "Rushhour6x6_1.csv"
     gamesize = 6
 
     # create game from input
     game = Game(gameboard, gamesize)
-    algorithm_type = randomise.Randomise(game)
+    algorithm_type = breadth_first.BreadthFirst(game)
     algorithm_type.run()
     solution = algorithm_type.return_solution()
 
@@ -51,4 +51,4 @@ plt.ylabel("Frequentie lengte pad")
 plt.title(f"Resultaten {algorithm_name} Algoritme {gameboard}")
 
 # save graph
-plt.savefig(f"{algorithm_name} {gameboard}")
+plt.savefig(f"{algorithm_name} game 6x6 1")
