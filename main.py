@@ -27,17 +27,20 @@ if __name__ == "__main__":
 
 
     # --------------------------- Depth First Algorithm ---------------------
-    #depth = depth_first.DepthFirst(game)
-    #depth.run()
+    depth = depth_first.DepthFirst(game)
+    depth.run()
 
-    #solution = depth.return_solution()
-
+    solution = depth.return_solution()
 
     # --------------------------- Hill Climber Algorithm ---------------------
-    hill_climber = hill_climber.HillClimber(game, solution)
-    hill_climber.run(100)
+    #hill_climber = hill_climber.HillClimber(game, solution)
+    #hill_climber.run(100)
 
-    solution = hill_climber.return_solution()
+    #solution = hill_climber.return_solution()
 
     # --------------------------- Results -------------------------------------
     print(f"Puzzle {gameboard} was solved in {len(solution)} moves.")
+    print(f"The sequence is:")
+
+    for move in solution:
+        print(move[1])

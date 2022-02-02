@@ -25,7 +25,7 @@ class DepthFirst:
             if new_board.is_solved(board = new_board, hillclimber = self.board):
                 
                 # Create the sequence of moves that lead to the solution
-                self.moves = self.find_path(new_board)
+                self.find_path(new_board)
                 break
                 
             # If no solution is found, keep building children
@@ -69,11 +69,9 @@ class DepthFirst:
         """
         Traces back the path to reach the solution.
         """
-        moves = []
         solution = []
 
         while new_board != self.start_board:
-            moves.insert(0, self.path[new_board][1])
             solution.insert(0, [new_board, self.path[new_board][1]])
 
             # Trace back to previous board
@@ -81,20 +79,9 @@ class DepthFirst:
             
         self.solution = solution
 
-        return moves
-    
-    
+
     def return_solution(self):
         '''
         Returns all moves and corresponding boards that lead to the solution.
         '''
         return self.solution
-
-
-
-        
-
-
-
-    
-
