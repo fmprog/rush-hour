@@ -42,7 +42,7 @@ class Game:
         """
         vehicles = {}
 
-        with open(f"data/gameboards/{game}") as file:
+        with open(f"data/{game}") as file:
             vehicle_data = csv.DictReader(file)
 
             for line in vehicle_data:
