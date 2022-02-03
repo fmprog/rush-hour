@@ -4,3 +4,9 @@ emily.py
 # pychace files
 __pycache__/
 
+# csv files
+*.csv
+
+# png files
+*.png
+
