@@ -41,7 +41,8 @@ The "results" section handles creating a CSV file with the results. The section 
   - **/code/classes:** contains all classes
     - **/code/classes/vehicle.py**: contains all necessary attributes of a vehicle
     - **/code/classes/game.py**: contains functions to create the gameboard (grid), load the vehicles onto the board from a csv file, show the gameboard, find possible moves on the board and play moves, and a function to check if the current board is solved
-  - **/code/visualisation:** empty!
+  - **/code/visualisation:** place to store histograms of the results
+  - **/code/results**: place to store CSV files of the results
 
 - **/data:** contains csv files with data to load 7 different rush hour gameboards:
   - 3 games with a 6x6 gameboard
