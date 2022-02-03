@@ -24,7 +24,7 @@ class HillClimber:
         # Pick a random start position and pick an end position to create an interval with a maximal length of 10
         position = random.randint(5, self.solution_len)
         if self.start_board.size == 6:
-            end_point_position = position + 10
+            end_point_position = position + 12
             if end_point_position > self.solution_len:
                 end_point_position = self.solution_len
         elif self.start_board.size == 9:

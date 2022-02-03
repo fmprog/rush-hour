@@ -8,21 +8,24 @@ from code.algorithms import hill_climber
 from code.classes.game import Game
 
 start = time.time()
-n_runs = 1
+n_runs = 0
 results = []
 
 start_time = time.time()
-while n_runs <= 100:
+while n_runs < 1:
 
     # choose gameboard and gameboard size
-    algorithm_name = "Breadth first"
-    gameboard = "Rushhour6x6_1.csv"
-    gamesize = 6
+    algorithm_name = "Hill Climber Depth First"
+    gameboard = "Rushhour9x9_4.csv"
+    gamesize = 9
 
     # create game from input
     game = Game(gameboard, gamesize)
-    algorithm_type = breadth_first.BreadthFirst(game)
+    algorithm_type = depth_first.DepthFirst(game)
     algorithm_type.run()
+    solution = algorithm_type.return_solution()
+    algorithm_type = hill_climber.HillClimber(game, solution)
+    algorithm_type.run(100)
     solution = algorithm_type.return_solution()
 
     results.append(len(solution))
@@ -41,7 +44,6 @@ with open(f'Results{algorithm_name}{gameboard}', 'w', encoding='UTF8', newline='
     for value in range(len(results)):
         writer.writerow([f'Run {value + 1}', results[value]])
     writer.writerow([f"Total time = {round(seconds, 5)} seconds."])
-    writer.writerow([f"Average time per run = {round((seconds / n_runs), 5)} seconds."])
     
 # --------------------------- Histogram ---------------------
 
@@ -51,4 +53,4 @@ plt.ylabel("Frequentie lengte pad")
 plt.title(f"Resultaten {algorithm_name} Algoritme {gameboard}")
 
 # save graph
-plt.savefig(f"{algorithm_name} game 6x6 1")
+plt.savefig(f"{algorithm_name} game 9x9 4")
