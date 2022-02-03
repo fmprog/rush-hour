@@ -52,5 +52,5 @@ In main.py in the section "Game" you can choose a gameboard by changing the game
 - Emily Timmerman
 
 ## Acknowledgements
-StackOverflow
-Minor programmering UvA
+- StackOverflow
+- Minor Programmering Universiteit van Amsterdam
