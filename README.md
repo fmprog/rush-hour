@@ -23,7 +23,7 @@ The formula is:
 This codebase is written in Python 3.8.10. No additional packages are required to run the code. 
 
 ### Instructions
-The code can by run by running the following code:
+The script can be executd by running the following code:
 ```
 python main.py
 ```
