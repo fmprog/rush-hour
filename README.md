@@ -27,7 +27,9 @@ The script can be executd by running the following code:
 ```
 python main.py
 ```
-In main.py in the section "Game" you can choose a gameboard by changing the gameboard and gamesize variables. By commenting out one of the algorithms, you can select an algorithm to run. Keep in mind the hill climber algorithm requires a solution from the depth first or random algorithm to run!
+In main.py in the section "Game" you can choose a gameboard by changing the gameboard and gamesize variables. By commenting out one of the algorithms, you can select an algorithm to run and the variable iterations allows you to choose how many times you want to run the algorithm. Keep in mind the hill climber algorithm requires a solution from the depth first or random algorithm to run!
+
+The "results" section handles creating a CSV file with the results. The section "histogram" allows you to turn the data into a histogram.
 
 ### Structure 
 - **/code:** contains all code for this project
